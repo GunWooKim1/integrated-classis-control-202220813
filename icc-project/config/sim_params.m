@@ -13,7 +13,7 @@ SIM.out_rate = 100;     % [Hz] 출력 저장 레이트
 %   'ode15s' : MATLAB stiff solver (BDF) — 저속/포화 영역에서 안정
 %   'rk4'    : 고정 스텝 4차 Runge-Kutta (3DOF/7DOF/14DOF 본래 방식)
 %   'euler'  : 1차 전진 Euler (bicycle 본래 방식, 학습/비교용)
-SIM.solver        = 'ode45';
+SIM.solver        = 'rk4';
 SIM.solver_RelTol = 1e-3;   % ode* 상대 오차 허용치
 SIM.solver_AbsTol = 1e-5;   % ode* 절대 오차 허용치
 
@@ -45,10 +45,10 @@ TIRE.E  = -0.5;    % Curvature factor
 TIRE.mu_peak = 1.0;  % 최대 마찰 계수
 
 %% 제어기 파라미터 — 횡방향 (Lateral)
-CTRL.LAT.Kp     = 1.0;     % 비례 게인
-CTRL.LAT.Ki     = 0.1;     % 적분 게인
-CTRL.LAT.Kd     = 0.05;    % 미분 게인
-CTRL.LAT.intMax = 5.0;     % 적분 안티와인드업 한계 [rad]
+CTRL.LAT.Kp     = 0.30;     % 비례 게인
+CTRL.LAT.Ki     = 0;     % 적분 게인
+CTRL.LAT.Kd     = 0.006;    % 미분 게인
+CTRL.LAT.intMax = 0.2;     % 적분 안티와인드업 한계 [rad]
 
 %% 제어기 파라미터 — 종방향 (Longitudinal)
 CTRL.LON.Kp     = 0.5;     % 비례 게인
@@ -67,11 +67,11 @@ CTRL.COORD.wVer  = 0.5;    % 수직 가중치
 CTRL.COORD.wEff  = 0.1;    % 에너지 효율 가중치
 
 %% 액추에이터 한계
-LIM.MAX_STEER_ANGLE = deg2rad(540 / 15);  % [rad] 최대 로드휠 조향각 (SW 540deg / ratio 15)
-LIM.MAX_STEER_RATE  = deg2rad(500 / 15);  % [rad/s] 최대 조향 속도
+LIM.MAX_STEER_ANGLE = 0.30;  % [rad] 최대 로드휠 조향각 (SW 540deg / ratio 15)
+LIM.MAX_STEER_RATE  = 2.5;  % [rad/s] 최대 조향 속도
 LIM.MAX_BRAKE_TRQ   = 3000;   % [Nm] 최대 브레이크 토크 (per wheel)
 LIM.MAX_AX          = 10.0;   % [m/s^2] 최대 종가속도
-LIM.MAX_AY          = 10.0;   % [m/s^2] 최대 횡가속도
+LIM.MAX_AY          = 8.0;   % [m/s^2] 최대 횡가속도
 LIM.MAX_JERK        = 50.0;   % [m/s^3] 최대 저크
 LIM.MAX_YAW_RATE    = deg2rad(60);   % [rad/s] 최대 요 레이트
 LIM.MAX_SLIP_ANGLE  = deg2rad(12);   % [rad] 최대 슬립 앵글

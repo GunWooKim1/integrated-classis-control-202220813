@@ -17,7 +17,7 @@ icc-project/data/scenarios_export/*_HD/
 icc-project/data/scenarios_export/cm_project/
 icc-project/data/scenarios_export/*.osc
 icc-project/data/scenarios_export/*.xodr
-# icc-project/grade_report.json
+icc-project/grade_report.json
 
 # Python / 캐시
 __pycache__/
